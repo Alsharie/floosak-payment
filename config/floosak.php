@@ -9,7 +9,6 @@ return [
     ],
     'url' => [
         //change 'payments-dev.urway-tech' to 'payments.urway-tech' when you are ready to go live
-        'base' => env('FLOOSAK_BASE_URL', 'https://payments-dev.urway-tech.com'),
-        'payment' => env('FLOOSAK_PAYMENT_URL', 'FLOOSAKPGService/transaction/jsonProcess/JSONrequest'),
+        'base' => env('FLOOSAK_BASE_URL', 'https://staging.qchosts.com'),
     ]
 ];
