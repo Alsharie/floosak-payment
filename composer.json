@@ -3,9 +3,11 @@
     "description": "Floosak payment gateway",
     "type": "library",
     "require": {
+        "php": ">=7.4",
         "guzzlehttp/guzzle": "^7.5",
         "illuminate/support": "^9.33"
     },
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Alsharie\\FloosakPayment\\": "src/"
