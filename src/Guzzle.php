@@ -46,6 +46,7 @@ class Guzzle
             $path,
             [
                 'headers' => [
+                    'Content-Type' => 'application/json',
                     'Accept' => 'application/json',
                 ],
                 'json' => $attributes,
@@ -54,28 +55,28 @@ class Guzzle
     }
 
 
-    public function getRequestKeyPath(): string
+    protected function getRequestKeyPath(): string
     {
         return $this->basePath . '/' . "api/merchant/v1/request/key";
     }
 
 
-    public function getVerifyKeyPath(): string
+    protected function getVerifyKeyPath(): string
     {
         return $this->basePath . '/' . "api/merchant/v1/verify/key";
     }
 
-    public function getPurchaseRequestPath(): string
+    protected function getPurchaseRequestPath(): string
     {
         return $this->basePath . '/' . "api/merchant/v1/purchase/request";
     }
 
-    public function getPurchaseConfirmPath(): string
+    protected function getPurchaseConfirmPath(): string
     {
         return $this->basePath . '/' . "api/merchant/v1/purchase/confirm";
     }
 
-    public function getCheckStatusPath(): string
+    protected function getCheckStatusPath(): string
     {
         return $this->basePath . '/' . "api/merchant/v1/check_status";
     }
