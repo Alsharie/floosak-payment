@@ -8,7 +8,6 @@ return [
         'key' => env('FLOOSAK_MERCHANT_KEY'),
     ],
     'url' => [
-        //change 'payments-dev.urway-tech' to 'payments.urway-tech' when you are ready to go live
         'base' => env('FLOOSAK_BASE_URL', 'https://staging.qchosts.com'),
     ]
 ];

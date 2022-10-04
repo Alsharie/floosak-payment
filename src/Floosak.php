@@ -3,6 +3,7 @@
 namespace Alsharie\FloosakPayment;
 
 
+use Alsharie\FloosakPayment\Responses\FloosakErrorResponse;
 use Alsharie\FloosakPayment\Responses\FloosakPurchaseConfirmResponse;
 use Alsharie\FloosakPayment\Responses\FloosakPurchaseRequestResponse;
 use Alsharie\FloosakPayment\Responses\FloosakPurchaseStatusResponse;
@@ -15,10 +16,9 @@ class Floosak extends FloosakAttributes
 
 
     /**
-     * @return FloosakRequestKeyResponse
-     * @throws Exception
+     * @return FloosakRequestKeyResponse|FloosakErrorResponse
      */
-    public function requestKey(): FloosakRequestKeyResponse
+    public function requestKey()
     {
         // set `phone`, and `short_code` .
         $this->setAuthAttributes();
@@ -31,7 +31,7 @@ class Floosak extends FloosakAttributes
 
             return new FloosakRequestKeyResponse((string)$response->getBody());
         } catch (\Throwable $e) {
-            throw new Exception($e->getMessage());
+            return new FloosakErrorResponse($e->getMessage());
         }
     }
 
@@ -44,10 +44,10 @@ class Floosak extends FloosakAttributes
      *
      * ------------------------------------
      *
-     * @return FloosakVerifyKeyResponse
+     * @return FloosakVerifyKeyResponse|FloosakErrorResponse
      * @throws Exception
      */
-    public function verifyKey(): FloosakVerifyKeyResponse
+    public function verifyKey()
     {
         // set `phone`, and `short_code` .
         $this->setAuthAttributes();
@@ -60,15 +60,15 @@ class Floosak extends FloosakAttributes
 
             return new FloosakVerifyKeyResponse((string)$response->getBody());
         } catch (\Throwable $e) {
-            throw new Exception($e->getMessage());
+            return new FloosakErrorResponse($e->getMessage());
         }
     }
 
     /**
-     * @return FloosakPurchaseRequestResponse
+     * @return FloosakPurchaseRequestResponse|FloosakErrorResponse
      * @throws Exception
      */
-    public function purchase(): FloosakPurchaseRequestResponse
+    public function purchase()
     {
         // set `request_id`, and `key` .
         $this->setMerchantKeyAttributes();
@@ -82,15 +82,15 @@ class Floosak extends FloosakAttributes
 
             return new FloosakPurchaseRequestResponse((string)$response->getBody());
         } catch (\Throwable $e) {
-            throw new Exception($e->getMessage());
+            return new FloosakErrorResponse($e->getMessage());
         }
     }
 
     /**
-     * @return FloosakPurchaseConfirmResponse
+     * @return FloosakPurchaseConfirmResponse|FloosakErrorResponse
      * @throws Exception
      */
-    public function confirmPurchase(): FloosakPurchaseConfirmResponse
+    public function confirmPurchase()
     {
         // set `request_id`, and `key` .
         $this->setMerchantKeyAttributes();
@@ -103,16 +103,16 @@ class Floosak extends FloosakAttributes
 
             return new FloosakPurchaseConfirmResponse((string)$response->getBody());
         } catch (\Throwable $e) {
-            throw new Exception($e->getMessage());
+            return new FloosakErrorResponse($e->getMessage());
         }
     }
 
 
     /**
-     * @return FloosakPurchaseStatusResponse
+     * @return FloosakPurchaseStatusResponse|FloosakErrorResponse
      * @throws Exception
      */
-    public function checkPurchaseStatus(): FloosakPurchaseStatusResponse
+    public function checkPurchaseStatus()
     {
         // set `request_id`, and `key` .
         $this->setMerchantKeyAttributes();
@@ -125,11 +125,9 @@ class Floosak extends FloosakAttributes
 
             return new FloosakPurchaseStatusResponse((string)$response->getBody());
         } catch (\Throwable $e) {
-            throw new Exception($e->getMessage());
+            return new FloosakErrorResponse($e->getMessage());
         }
     }
-
-
 
 
 }

@@ -5,6 +5,7 @@ namespace Alsharie\FloosakPayment\Responses;
 
 class FloosakResponse
 {
+    protected $success = true;
     /**
      * Store the response data.
      *
@@ -36,5 +37,11 @@ class FloosakResponse
     {
         return $this->data;
     }
+
+    public function isSuccess()
+    {
+        return $this->success;
+    }
+
 
 }
