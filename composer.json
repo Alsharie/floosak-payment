@@ -1,0 +1,30 @@
+{
+    "name": "alsharie/floosak-payment",
+    "description": "Floosak payment gateway",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "^7.5",
+        "illuminate/support": "^9.33"
+    },
+    "autoload": {
+        "psr-4": {
+            "Alsharie\\FloosakPayment\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alsharie",
+            "email": "abdulrahman.alsharie@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Alsharie\\FloosakPayment\\FloosakServiceProvider"
+            ],
+            "aliases": {
+                "FloosakPayment": "Alsharie\\FloosakPayment\\Facade\\FloosakPayment"
+            }
+        }
+    }
+}
