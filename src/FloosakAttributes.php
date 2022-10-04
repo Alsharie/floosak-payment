@@ -3,12 +3,6 @@
 namespace Alsharie\FloosakPayment;
 
 
-use Alsharie\FloosakPayment\Responses\FloosakPurchaseConfirmResponse;
-use Alsharie\FloosakPayment\Responses\FloosakPurchaseRequestResponse;
-use Alsharie\FloosakPayment\Responses\FloosakRequestKeyResponse;
-use Alsharie\FloosakPayment\Responses\FloosakVerifyKeyResponse;
-use Exception;
-
 class FloosakAttributes extends Guzzle
 {
 
@@ -19,6 +13,16 @@ class FloosakAttributes extends Guzzle
      */
     protected $attributes = [];
 
+
+    /**
+     * This field contains any random number you generate
+     * @return $this
+     */
+    public function setRequestId($requestId): Floosak
+    {
+        $this->attributes['request_id'] = $requestId;
+        return $this;
+    }
 
     /**
      * This field contains any random number you generate
@@ -143,8 +147,6 @@ class FloosakAttributes extends Guzzle
     }
 
 
-
-
     /**
      * @return void
      */
@@ -163,7 +165,6 @@ class FloosakAttributes extends Guzzle
         $this->attributes['request_id'] = config('floosak.auth.request_id');
         $this->attributes['key'] = config('floosak.auth.key');
     }
-
 
 
 }

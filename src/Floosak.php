@@ -9,7 +9,6 @@ use Alsharie\FloosakPayment\Responses\FloosakPurchaseRequestResponse;
 use Alsharie\FloosakPayment\Responses\FloosakPurchaseStatusResponse;
 use Alsharie\FloosakPayment\Responses\FloosakRequestKeyResponse;
 use Alsharie\FloosakPayment\Responses\FloosakVerifyKeyResponse;
-use Exception;
 
 class Floosak extends FloosakAttributes
 {
@@ -45,12 +44,9 @@ class Floosak extends FloosakAttributes
      * ------------------------------------
      *
      * @return FloosakVerifyKeyResponse|FloosakErrorResponse
-     * @throws Exception
      */
     public function verifyKey()
     {
-        // set `phone`, and `short_code` .
-        $this->setAuthAttributes();
 
         try {
             $response = $this->sendRequest(
@@ -66,7 +62,6 @@ class Floosak extends FloosakAttributes
 
     /**
      * @return FloosakPurchaseRequestResponse|FloosakErrorResponse
-     * @throws Exception
      */
     public function purchase()
     {
@@ -88,7 +83,6 @@ class Floosak extends FloosakAttributes
 
     /**
      * @return FloosakPurchaseConfirmResponse|FloosakErrorResponse
-     * @throws Exception
      */
     public function confirmPurchase()
     {
@@ -110,7 +104,6 @@ class Floosak extends FloosakAttributes
 
     /**
      * @return FloosakPurchaseStatusResponse|FloosakErrorResponse
-     * @throws Exception
      */
     public function checkPurchaseStatus()
     {
