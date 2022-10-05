@@ -89,11 +89,6 @@ To purchase using Floosak payment
 ```php
  $floosak = new Floosak();
  $response = $floosak
-     ->setRefId(/*ref_id*/) // the random number you generated  
-     ->setAmount(/*amount*/)
-     ->setCustomerPhone(/*phone*/)
-     ->purchase();
- $response = $floosak
       ->setRefId(/*ref_id*/) // the number you generated in above request
       ->setOtp(/*user_otp*/)
       ->setPurchaseId(/*purchase_id*/) // you get it from the response of the above request `purchase()`
