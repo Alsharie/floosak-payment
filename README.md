@@ -1,7 +1,7 @@
 # floosak-payment
+![img.png](img.png)
 
 laravel package for floosak payment getway
-
 install the package
 `composer require alsharie/floosak-payment`
 
@@ -121,6 +121,35 @@ To purchase using Floosak payment
  }
 
 ```
+--------------
+### Balance enquiry
 
+```php
+ $floosak = new Floosak();
+ $response = $floosak
+     ->setReqId(/*req_id*/) // the random number you generated  
+     ->balanceEnquiry();
+
+ if ($response->isSuccess()) {
+     return $response->getBalance();
+ }
+
+```
+--------------
+### Refund
+
+```php
+ $floosak = new Floosak();
+ $response = $floosak
+     ->setRefId(/*ref_id*/) // the random number you generated  
+     ->setTransactionId(/*tran_id*/)
+     ->setAmount(/*amount*/) // amount to refund
+     ->refund();
+
+ if ($response->isSuccess()) {
+     return $response->getBalance();
+ }
+
+```
 
 you can get the full **response body** using `$response->body()` for all requests
