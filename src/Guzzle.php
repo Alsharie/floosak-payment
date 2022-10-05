@@ -80,4 +80,12 @@ class Guzzle
     {
         return $this->basePath . '/' . "api/merchant/v1/check_status";
     }
+    protected function getRefundPath(): string
+    {
+        return $this->basePath . '/' . "api/merchant/v1/refund";
+    }
+    protected function getBalanceEnquiryPath(): string
+    {
+        return $this->basePath . '/' . "api/merchant/v1/balance_enquiry";
+    }
 }

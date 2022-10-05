@@ -3,7 +3,9 @@
 namespace Alsharie\FloosakPayment;
 
 
+use Alsharie\FloosakPayment\Responses\FloosakBalanceEnquiryResponse;
 use Alsharie\FloosakPayment\Responses\FloosakErrorResponse;
+use Alsharie\FloosakPayment\Responses\FloosakRefundResponse;
 use Alsharie\FloosakPayment\Responses\FloosakPurchaseConfirmResponse;
 use Alsharie\FloosakPayment\Responses\FloosakPurchaseRequestResponse;
 use Alsharie\FloosakPayment\Responses\FloosakPurchaseStatusResponse;
@@ -117,6 +119,52 @@ class Floosak extends FloosakAttributes
             );
 
             return new FloosakPurchaseStatusResponse((string)$response->getBody());
+        } catch (\Throwable $e) {
+            return new FloosakErrorResponse($e->getMessage());
+        }
+    }
+
+
+
+    /**
+     * @return FloosakRefundResponse|FloosakErrorResponse
+     */
+    public function refund()
+    {
+        // set `request_id`, and `key` .
+        $this->setMerchantKeyAttributes();
+
+        try {
+            $response = $this->sendRequest(
+                $this->getRefundPath(),
+                $this->attributes
+            );
+
+            return new FloosakRefundResponse((string)$response->getBody());
+        } catch (\Throwable $e) {
+            return new FloosakErrorResponse($e->getMessage());
+        }
+    }
+
+
+    /**
+     * @return FloosakBalanceEnquiryResponse|FloosakErrorResponse
+     */
+    public function balanceEnquiry()
+    {
+        // set `phone`, and `short_code` .
+        $this->setAuthAttributes();
+
+        // set `request_id`, and `key` .
+        $this->setMerchantKeyAttributes();
+
+        try {
+            $response = $this->sendRequest(
+                $this->getBalanceEnquiryPath(),
+                $this->attributes
+            );
+
+            return new FloosakBalanceEnquiryResponse((string)$response->getBody());
         } catch (\Throwable $e) {
             return new FloosakErrorResponse($e->getMessage());
         }

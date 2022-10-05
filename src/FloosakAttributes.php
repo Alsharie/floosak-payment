@@ -8,17 +8,16 @@ class FloosakAttributes extends Guzzle
 
     /**
      * Store request attributes.
-     *
-     * @var array
      */
-    protected $attributes = [];
+    protected array $attributes = [];
 
 
     /**
-     * This field contains any random number you generate
-     * @return $this
+     * his field contains merchant request id for all process. It’s unique you got from request key
+     * @param $requestId
+     * @return FloosakAttributes
      */
-    public function setRequestId($requestId): Floosak
+    public function setRequestId($requestId): FloosakAttributes
     {
         $this->attributes['request_id'] = $requestId;
         return $this;
@@ -26,21 +25,36 @@ class FloosakAttributes extends Guzzle
 
     /**
      * This field contains any random number you generate
-     * @return $this
+     * @param $refId
+     * @return FloosakAttributes
      */
-    public function setRefId($refId): Floosak
+    public function setRefId($refId): FloosakAttributes
     {
         $this->attributes['ref_id'] = $refId;
+        return $this;
+    }
+
+
+    /**
+     * This field contains any random number you generate
+     * used in [Balance Enquiry] request
+     * @param $reqId
+     * @return FloosakAttributes
+     */
+    public function setReqId($reqId): FloosakAttributes
+    {
+        $this->attributes['req_id'] = $reqId;
         return $this;
     }
 
     /**
      * This field contains id of product purchase which customer
      * want to pay for it.
-     * You got from purchase request AP
-     * @return $this
+     * You got from [purchase request] API
+     * @param $purchaseId
+     * @return FloosakAttributes
      */
-    public function setPurchaseId($purchaseId): Floosak
+    public function setPurchaseId($purchaseId): FloosakAttributes
     {
         $this->attributes['purchase_id'] = $purchaseId;
         return $this;
@@ -59,7 +73,7 @@ class FloosakAttributes extends Guzzle
     }
 
     /**
-     * t’s 6 digit and unique we sent it to customer phone via SMS
+     * it’s 6 digit and unique we sent it to customer phone via SMS
      * when you use purchase request API.
      * @param $otp
      * @return FloosakAttributes
@@ -71,7 +85,8 @@ class FloosakAttributes extends Guzzle
     }
 
     /**
-     * @return $this
+     * @param $phone
+     * @return FloosakAttributes
      */
     public function setCustomerPhone($phone): FloosakAttributes
     {
@@ -81,7 +96,8 @@ class FloosakAttributes extends Guzzle
 
 
     /**
-     * @return $this
+     * @param $amount
+     * @return FloosakAttributes
      */
     public function setAmount($amount): FloosakAttributes
     {
@@ -91,7 +107,8 @@ class FloosakAttributes extends Guzzle
 
 
     /**
-     * @return $this
+     * @param array $attributes
+     * @return FloosakAttributes
      */
     public function setAttributes(array $attributes): FloosakAttributes
     {
@@ -102,7 +119,7 @@ class FloosakAttributes extends Guzzle
     /**
      * @param array $attributes
      *
-     * @return $this
+     * @return FloosakAttributes
      */
     public function mergeAttributes(array $attributes): FloosakAttributes
     {
@@ -114,7 +131,7 @@ class FloosakAttributes extends Guzzle
      * @param mixed $key
      * @param mixed $value
      *
-     * @return $this
+     * @return FloosakAttributes
      */
     public function setAttribute($key, $value): FloosakAttributes
     {
