@@ -18,7 +18,7 @@ class FloosakResponse
      */
     public function __construct($response)
     {
-        $this->data = json_decode($response, true);
+        $this->data = (array) json_decode($response, true);
     }
 
 

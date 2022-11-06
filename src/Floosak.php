@@ -3,6 +3,7 @@
 namespace Alsharie\FloosakPayment;
 
 
+use Alsharie\CashPayPayment\Responses\CashPayErrorResponse;
 use Alsharie\FloosakPayment\Responses\FloosakBalanceEnquiryResponse;
 use Alsharie\FloosakPayment\Responses\FloosakErrorResponse;
 use Alsharie\FloosakPayment\Responses\FloosakRefundResponse;
@@ -31,8 +32,8 @@ class Floosak extends FloosakAttributes
             );
 
             return new FloosakRequestKeyResponse((string)$response->getBody());
-        } catch (\Throwable $e) {
-            return new FloosakErrorResponse($e->getMessage());
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            return new FloosakErrorResponse($e->getResponse()->getBody(),$e->getResponse()->getStatusCode());
         }
     }
 
@@ -57,8 +58,8 @@ class Floosak extends FloosakAttributes
             );
 
             return new FloosakVerifyKeyResponse((string)$response->getBody());
-        } catch (\Throwable $e) {
-            return new FloosakErrorResponse($e->getMessage());
+         } catch (\GuzzleHttp\Exception\RequestException $e) {
+            return new FloosakErrorResponse($e->getResponse()->getBody(),$e->getResponse()->getStatusCode());
         }
     }
 
@@ -78,8 +79,8 @@ class Floosak extends FloosakAttributes
 
 
             return new FloosakPurchaseRequestResponse((string)$response->getBody());
-        } catch (\Throwable $e) {
-            return new FloosakErrorResponse($e->getMessage());
+         } catch (\GuzzleHttp\Exception\RequestException $e) {
+            return new FloosakErrorResponse($e->getResponse()->getBody(),$e->getResponse()->getStatusCode());
         }
     }
 
@@ -98,8 +99,8 @@ class Floosak extends FloosakAttributes
             );
 
             return new FloosakPurchaseConfirmResponse((string)$response->getBody());
-        } catch (\Throwable $e) {
-            return new FloosakErrorResponse($e->getMessage());
+         } catch (\GuzzleHttp\Exception\RequestException $e) {
+            return new FloosakErrorResponse($e->getResponse()->getBody(),$e->getResponse()->getStatusCode());
         }
     }
 
@@ -119,8 +120,8 @@ class Floosak extends FloosakAttributes
             );
 
             return new FloosakPurchaseStatusResponse((string)$response->getBody());
-        } catch (\Throwable $e) {
-            return new FloosakErrorResponse($e->getMessage());
+         } catch (\GuzzleHttp\Exception\RequestException $e) {
+            return new FloosakErrorResponse($e->getResponse()->getBody(),$e->getResponse()->getStatusCode());
         }
     }
 
@@ -141,8 +142,8 @@ class Floosak extends FloosakAttributes
             );
 
             return new FloosakRefundResponse((string)$response->getBody());
-        } catch (\Throwable $e) {
-            return new FloosakErrorResponse($e->getMessage());
+         } catch (\GuzzleHttp\Exception\RequestException $e) {
+            return new FloosakErrorResponse($e->getResponse()->getBody(),$e->getResponse()->getStatusCode());
         }
     }
 
@@ -165,8 +166,8 @@ class Floosak extends FloosakAttributes
             );
 
             return new FloosakBalanceEnquiryResponse((string)$response->getBody());
-        } catch (\Throwable $e) {
-            return new FloosakErrorResponse($e->getMessage());
+         } catch (\GuzzleHttp\Exception\RequestException $e) {
+            return new FloosakErrorResponse($e->getResponse()->getBody(),$e->getResponse()->getStatusCode());
         }
     }
 
