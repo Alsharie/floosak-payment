@@ -39,15 +39,17 @@ class Guzzle
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    protected function sendRequest($path, $attributes, $method = 'POST'): ResponseInterface
+    protected function sendRequest($path, $attributes, $headers=[], $method = 'POST'): ResponseInterface
     {
         return $this->guzzleClient->request(
             $method,
             $path,
             [
                 'headers' => [
+                    ...$headers,
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json',
+                    'x-channel' => 'merchant'
                 ],
                 'json' => $attributes,
             ]
@@ -57,35 +59,29 @@ class Guzzle
 
     protected function getRequestKeyPath(): string
     {
-        return $this->basePath . '/' . "api/merchant/v1/request/key";
+        return $this->basePath . '/' . "api/v1/request/key";
     }
 
 
     protected function getVerifyKeyPath(): string
     {
-        return $this->basePath . '/' . "api/merchant/v1/verify/key";
+        return $this->basePath . '/' . "api/v1/verify/key";
     }
 
     protected function getPurchaseRequestPath(): string
     {
-        return $this->basePath . '/' . "api/merchant/v1/purchase/request";
+        return $this->basePath . '/' . "api/v1/merchant/p2mcl";
     }
 
     protected function getPurchaseConfirmPath(): string
     {
-        return $this->basePath . '/' . "api/merchant/v1/purchase/confirm";
+        return $this->basePath . '/' . "api/v1/merchant/p2mcl/confirm";
     }
 
-    protected function getCheckStatusPath(): string
-    {
-        return $this->basePath . '/' . "api/merchant/v1/check_status";
-    }
+
     protected function getRefundPath(): string
     {
-        return $this->basePath . '/' . "api/merchant/v1/refund";
+        return $this->basePath . '/' . "api/v1/merchant/p2mcl/refund";
     }
-    protected function getBalanceEnquiryPath(): string
-    {
-        return $this->basePath . '/' . "api/merchant/v1/balance_enquiry";
-    }
+
 }

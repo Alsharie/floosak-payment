@@ -9,10 +9,10 @@ class FloosakPurchaseRequestResponse extends FloosakResponse
     /**
      * @return string
      */
-    public function getState()
+    public function getStatus()
     {
-        if (!empty($this->data['state'])) {
-            return $this->data['state'];
+        if (!empty($this->data['data']['status'])) {
+            return $this->data['data']['status'];
         }
 
         return false;
@@ -23,8 +23,8 @@ class FloosakPurchaseRequestResponse extends FloosakResponse
      */
     public function getAmount()
     {
-        if (!empty($this->data['amount'])) {
-            return $this->data['amount'];
+        if (!empty($this->data['data']['net'])) {
+            return $this->data['data']['net'];
         }
 
         return false;
@@ -36,8 +36,8 @@ class FloosakPurchaseRequestResponse extends FloosakResponse
      */
     public function getPurchaseId()
     {
-        if (!empty($this->data['purchase_id'])) {
-            return $this->data['purchase_id'];
+        if (!empty($this->data['data']['id'])) {
+            return $this->data['data']['id'];
         }
 
         return false;
@@ -48,8 +48,8 @@ class FloosakPurchaseRequestResponse extends FloosakResponse
      */
     public function getRefId()
     {
-        if (!empty($this->data['ref_id'])) {
-            return $this->data['ref_id'];
+        if (!empty($this->data['data']['reference_id'])) {
+            return $this->data['data']['reference_id'];
         }
 
         return false;

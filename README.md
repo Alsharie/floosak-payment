@@ -2,6 +2,9 @@
 ![img.png](img.png)
 
 laravel package for floosak payment getway
+
+Floosak payment api after update to (p2mcl)
+
 install the package
 `composer require alsharie/floosak-payment`
 
@@ -16,11 +19,11 @@ return [
     'auth' => [
         'phone' => env('FLOOSAK_MERCHANT_PHONE'),
         'short_code' => env('FLOOSAK_MERCHANT_SHORT_CODE'),
-        'request_id' => env('FLOOSAK_MERCHANT_REQUEST_ID'),
+        'wallet_id' => env('FLOOSAK_MERCHANT_WALLET_ID'),
         'key' => env('FLOOSAK_MERCHANT_KEY'),
     ],
     'url' => [
-        'base' => env('FLOOSAK_BASE_URL', 'https://staging.qchosts.com'),
+        'base' => env('FLOOSAK_BASE_URL', 'https://staging.fintech-expert.net'),
     ]
 ];
 ```
@@ -54,8 +57,8 @@ $response = $floosak
 
 if ($response->isSuccess()) {
     $key= $response->getKey();
-    $request_id= $response->getRequestId();
-    //todo:: store $key and $request_id
+    $wallet_id= $response->getWalletId();
+    //todo:: store $key and $wallet_id
     
 } else {
 
@@ -71,9 +74,10 @@ To purchase using Floosak payment
 ```php
  $floosak = new Floosak();
  $response = $floosak
-     ->setRefId(/*ref_id*/) // random number you generate most 
+     ->setRequestId(/*ref_id*/) // random number you generate most 
      ->setAmount(/*amount*/)
      ->setCustomerPhone(/*phone*/)
+     ->setPurpose(/*purpose*/)
      ->purchase();
 
  if ($response->isSuccess()) {
@@ -89,9 +93,8 @@ To purchase using Floosak payment
 ```php
  $floosak = new Floosak();
  $response = $floosak
-      ->setRefId(/*ref_id*/) // the number you generated in above request
-      ->setOtp(/*user_otp*/)
       ->setPurchaseId(/*purchase_id*/) // you get it from the response of the above request `purchase()`
+      ->setOtp(/*user_otp*/)
       ->confirmPurchase();
  if ($response->isSuccess()) {
     $tran_id = $response->getTransactionId();
@@ -101,42 +104,14 @@ To purchase using Floosak payment
         
 ```
 
------------
-### Check purchase status
 
-```php
- $floosak = new Floosak();
- $response = $floosak
-     ->setRefId(/*ref_id*/) // the random number you generated  
-     ->setTransactionId(/*tran_id*/)
-     ->checkPurchaseStatus();
-
- if ($response->isSuccess()) {
-     return $response->getStatus();
- }
-
-```
---------------
-### Balance enquiry
-
-```php
- $floosak = new Floosak();
- $response = $floosak
-     ->setReqId(/*req_id*/) // the random number you generated  
-     ->balanceEnquiry();
-
- if ($response->isSuccess()) {
-     return $response->getBalance();
- }
-
-```
 --------------
 ### Refund
 
 ```php
  $floosak = new Floosak();
  $response = $floosak
-     ->setRefId(/*ref_id*/) // the random number you generated  
+     ->setRequestId(/*ref_id*/) // the random number you generated  
      ->setTransactionId(/*tran_id*/)
      ->setAmount(/*amount*/) // amount to refund
      ->refund();

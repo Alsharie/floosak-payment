@@ -20,14 +20,39 @@ class FloosakVerifyKeyResponse extends FloosakResponse
     }
 
 
+    /**
+     * @return string
+     */
+    public function getAccount()
+    {
+        if (!empty($this->data['account_detail'])) {
+            if ($this->data['account_detail']['account'])
+                return $this->data['account_detail']['account'];
+        }
+
+        return false;
+    }
+
+
 
     /**
      * @return string
      */
-    public function getRequestId()
+    public function getWallets()
     {
-        if (!empty($this->data['request_id'])) {
-            return $this->data['request_id'];
+        if ($this->getAccount()) {
+            return $this->getAccount()['wallets'];
+        }
+
+        return false;
+    }
+    /**
+     * @return string
+     */
+    public function getWalletId()
+    {
+        if ($this->getWallets()) {
+            return $this->getWallets()[0]['id'];
         }
 
         return false;

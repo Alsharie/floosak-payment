@@ -3,6 +3,8 @@
 namespace Alsharie\FloosakPayment;
 
 
+use Alsharie\JawaliPayment\Helpers\JawaliAuthHelper;
+
 class FloosakAttributes extends Guzzle
 {
 
@@ -11,6 +13,7 @@ class FloosakAttributes extends Guzzle
      */
     protected array $attributes = [];
 
+    protected array $headers = [];
 
     /**
      * his field contains merchant request id for all process. It’s unique you got from request key
@@ -90,7 +93,29 @@ class FloosakAttributes extends Guzzle
      */
     public function setCustomerPhone($phone): FloosakAttributes
     {
-        $this->attributes['customer_phone'] = $phone;
+        $this->attributes['target_phone'] = $phone;
+        return $this;
+    }
+
+
+    /**
+     * @param $phone
+     * @return FloosakAttributes
+     */
+    public function setTargetPhone($phone): FloosakAttributes
+    {
+        $this->attributes['target_phone'] = $phone;
+        return $this;
+    }
+
+
+    /**
+     * @param $purpose
+     * @return FloosakAttributes
+     */
+    public function setPurpose($purpose): FloosakAttributes
+    {
+        $this->attributes['purpose'] = $purpose;
         return $this;
     }
 
@@ -177,11 +202,16 @@ class FloosakAttributes extends Guzzle
     /**
      * @return void
      */
-    protected function setMerchantKeyAttributes()
+    protected function setMerchantWalletId()
     {
-        $this->attributes['request_id'] = config('floosak.auth.request_id');
-        $this->attributes['key'] = config('floosak.auth.key');
+        $this->attributes['source_wallet_id'] = config('floosak.auth.wallet_id');
     }
 
-
+    /**
+     * @return void
+     */
+    protected function setAuthorization()
+    {
+        $this->headers['Authorization'] = 'bearer ' . config('floosak.auth.key');
+    }
 }

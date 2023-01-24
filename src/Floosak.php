@@ -68,13 +68,15 @@ class Floosak extends FloosakAttributes
      */
     public function purchase()
     {
-        // set `request_id`, and `key` .
-        $this->setMerchantKeyAttributes();
+        // set `source_wallet_id`, and `key` .
+        $this->setMerchantWalletId();
+        $this->setAuthorization();
 
         try {
             $response = $this->sendRequest(
                 $this->getPurchaseRequestPath(),
-                $this->attributes
+                $this->attributes,
+                $this->headers,
             );
 
 
@@ -89,13 +91,14 @@ class Floosak extends FloosakAttributes
      */
     public function confirmPurchase()
     {
-        // set `request_id`, and `key` .
-        $this->setMerchantKeyAttributes();
+        // set `key` .
+        $this->setAuthorization();
 
         try {
             $response = $this->sendRequest(
                 $this->getPurchaseConfirmPath(),
-                $this->attributes
+                $this->attributes,
+                $this->headers,
             );
 
             return new FloosakPurchaseConfirmResponse((string)$response->getBody());
@@ -106,34 +109,12 @@ class Floosak extends FloosakAttributes
 
 
     /**
-     * @return FloosakPurchaseStatusResponse|FloosakErrorResponse
-     */
-    public function checkPurchaseStatus()
-    {
-        // set `request_id`, and `key` .
-        $this->setMerchantKeyAttributes();
-
-        try {
-            $response = $this->sendRequest(
-                $this->getCheckStatusPath(),
-                $this->attributes
-            );
-
-            return new FloosakPurchaseStatusResponse((string)$response->getBody());
-         } catch (\GuzzleHttp\Exception\RequestException $e) {
-            return new FloosakErrorResponse($e->getResponse()->getBody(),$e->getResponse()->getStatusCode());
-        }
-    }
-
-
-
-    /**
      * @return FloosakRefundResponse|FloosakErrorResponse
      */
     public function refund()
     {
-        // set `request_id`, and `key` .
-        $this->setMerchantKeyAttributes();
+        // set  `key` .
+        $this->setAuthorization();
 
         try {
             $response = $this->sendRequest(
@@ -142,30 +123,6 @@ class Floosak extends FloosakAttributes
             );
 
             return new FloosakRefundResponse((string)$response->getBody());
-         } catch (\GuzzleHttp\Exception\RequestException $e) {
-            return new FloosakErrorResponse($e->getResponse()->getBody(),$e->getResponse()->getStatusCode());
-        }
-    }
-
-
-    /**
-     * @return FloosakBalanceEnquiryResponse|FloosakErrorResponse
-     */
-    public function balanceEnquiry()
-    {
-        // set `phone`, and `short_code` .
-        $this->setAuthAttributes();
-
-        // set `request_id`, and `key` .
-        $this->setMerchantKeyAttributes();
-
-        try {
-            $response = $this->sendRequest(
-                $this->getBalanceEnquiryPath(),
-                $this->attributes
-            );
-
-            return new FloosakBalanceEnquiryResponse((string)$response->getBody());
          } catch (\GuzzleHttp\Exception\RequestException $e) {
             return new FloosakErrorResponse($e->getResponse()->getBody(),$e->getResponse()->getStatusCode());
         }
