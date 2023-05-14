@@ -3,8 +3,6 @@
 namespace Alsharie\FloosakPayment;
 
 
-use Alsharie\JawaliPayment\Helpers\JawaliAuthHelper;
-
 class FloosakAttributes extends Guzzle
 {
 
