@@ -48,6 +48,7 @@ class Guzzle
                 'headers' => [
                     ...$headers,
                     'Content-Type' => 'application/json',
+                    'Accept' => 'application/json',
                     'x-channel' => 'merchant'
                 ],
                 'json' => $attributes,

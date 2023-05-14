@@ -212,6 +212,6 @@ class FloosakAttributes extends Guzzle
      */
     protected function setAuthorization()
     {
-        $this->headers['Authorization'] = 'bearer ' . config('floosak.auth.key');
+        $this->headers['Authorization'] = 'Bearer ' . config('floosak.auth.key');
     }
 }
