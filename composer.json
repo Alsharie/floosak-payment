@@ -25,7 +25,7 @@
                 "Alsharie\\FloosakPayment\\FloosakServiceProvider"
             ],
             "aliases": {
-                "FloosakPayment": "Alsharie\\FloosakPayment\\Facade\\FloosakPayment"
+                "FloosakPayment": "FloosakPaymentGateway"
             }
         }
     }
